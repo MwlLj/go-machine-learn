@@ -2,11 +2,15 @@ package tree
 
 import (
 	"errors"
+	"fmt"
 )
 
+var _ = fmt.Println
+
 type Node struct {
-	Name        string
-	FeatureList []Node
+	Classify    string  `json:"classify"`
+	FeatureList *[]Node `json:"feature-list"`
+	Lable       string  `json:"lable"`
 }
 
 func ChooseBestFeature(dataSet *[][]string) int {
@@ -33,24 +37,45 @@ func ChooseBestFeature(dataSet *[][]string) int {
 	return bestFeature
 }
 
-func CreateTree(dataSet *[][]string, lables *[]string) string {
+func CreateTree(dataSet *[][]string, lables *[]string) *Node {
 	featureNumber, _ := calcFeatureNumber(dataSet)
-	classifySet, classifys := getFeatureValueSet(dataSet, featureNumber+1)
+	classifySet, classifys := getFeatureValueSet(dataSet, featureNumber)
 	if featureNumber == 0 {
 		// no feature
 		pairList := timesSort(classifys)
-		return (*pairList)[0].Key
+		node := Node{
+			Classify:    (*pairList)[0].Key,
+			FeatureList: nil,
+			Lable:       "",
+		}
+		return &node
 	}
 	if len(*classifySet) == 1 {
-		return (*classifySet)[0]
+		node := Node{
+			Classify:    (*classifySet)[0],
+			FeatureList: nil,
+			Lable:       "",
+		}
+		return &node
 	}
 	bestFeatureIndex := ChooseBestFeature(dataSet)
-	name := (*lables)[bestFeatureIndex]
+	// name := (*lables)[bestFeatureIndex]
 	sets, _ := getFeatureValueSet(dataSet, bestFeatureIndex)
-	for _, item := range sets {
+	nodes := []Node{}
+	for _, item := range *sets {
+		itemTmp := item
+		subSet := SplitDataSet(dataSet, bestFeatureIndex, &itemTmp)
+		node := CreateTree(subSet, lables)
+		node.Lable = item
+		nodes = append(nodes, *node)
 	}
-	Node{name}
-	return ""
+	lable := (*lables)[bestFeatureIndex]
+	fmt.Println("lable: ", lable)
+	return &Node{
+		Classify:    "",
+		FeatureList: &nodes,
+		Lable:       lable,
+	}
 }
 
 func getFeatureValueSet(dataSet *[][]string, featureIndex int) (featureSet *[]string, features *[]string) {
