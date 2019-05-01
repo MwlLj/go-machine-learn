@@ -8,9 +8,10 @@ import (
 var _ = fmt.Println
 
 type Node struct {
-	Classify    string  `json:"classify"`
-	FeatureList *[]Node `json:"feature-list"`
-	Lable       string  `json:"lable"`
+	Classify     string  `json:"classify"`
+	FeatureList  *[]Node `json:"feature-list"`
+	Lable        string  `json:"lable"`
+	FeatureValue string  `json:"feature-value"`
 }
 
 func ChooseBestFeature(dataSet *[][]string) int {
@@ -65,12 +66,11 @@ func CreateTree(dataSet *[][]string, lables *[]string) *Node {
 	for _, item := range *sets {
 		itemTmp := item
 		subSet := SplitDataSet(dataSet, bestFeatureIndex, &itemTmp)
-		node := CreateTree(subSet, lables)
-		node.Lable = item
+		node := CreateTree(subSet, removeArrayIndex(lables, bestFeatureIndex))
+		node.FeatureValue = item
 		nodes = append(nodes, *node)
 	}
 	lable := (*lables)[bestFeatureIndex]
-	fmt.Println("lable: ", lable)
 	return &Node{
 		Classify:    "",
 		FeatureList: &nodes,
@@ -85,10 +85,10 @@ func FindByOrderFeature(node *Node, featureValues *[]string) *string {
 	for _, item := range *node.FeatureList {
 		first := (*featureValues)[0]
 		after := (*featureValues)[1:]
-		if first == item.Lable && item.FeatureList == nil {
+		if first == item.FeatureValue && item.FeatureList == nil {
 			return &item.Classify
 		}
-		if first == item.Lable && item.FeatureList != nil {
+		if first == item.FeatureValue && item.FeatureList != nil {
 			return FindByOrderFeature(&item, &after)
 		}
 	}
@@ -116,4 +116,10 @@ func calcFeatureNumber(dataSet *[][]string) (int, error) {
 	}
 	featureNumber := len((*dataSet)[0]) - 1
 	return featureNumber, nil
+}
+
+func removeArrayIndex(arr *[]string, index int) *[]string {
+	retArr := (*arr)[0:index]
+	retArr = append(retArr, (*arr)[index+1:]...)
+	return &retArr
 }
