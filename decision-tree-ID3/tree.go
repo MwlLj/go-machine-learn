@@ -4,6 +4,11 @@ import (
 	"errors"
 )
 
+type Node struct {
+	Name        string
+	FeatureList []Node
+}
+
 func ChooseBestFeature(dataSet *[][]string) int {
 	baseEnt := CalcShannoEnt(dataSet)
 	bestEnt := 0.0
@@ -39,6 +44,12 @@ func CreateTree(dataSet *[][]string, lables *[]string) string {
 	if len(*classifySet) == 1 {
 		return (*classifySet)[0]
 	}
+	bestFeatureIndex := ChooseBestFeature(dataSet)
+	name := (*lables)[bestFeatureIndex]
+	sets, _ := getFeatureValueSet(dataSet, bestFeatureIndex)
+	for _, item := range sets {
+	}
+	Node{name}
 	return ""
 }
 
