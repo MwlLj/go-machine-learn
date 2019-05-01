@@ -78,6 +78,23 @@ func CreateTree(dataSet *[][]string, lables *[]string) *Node {
 	}
 }
 
+func FindByOrderFeature(node *Node, featureValues *[]string) *string {
+	if node.FeatureList == nil {
+		return &node.Classify
+	}
+	for _, item := range *node.FeatureList {
+		first := (*featureValues)[0]
+		after := (*featureValues)[1:]
+		if first == item.Lable && item.FeatureList == nil {
+			return &item.Classify
+		}
+		if first == item.Lable && item.FeatureList != nil {
+			return FindByOrderFeature(&item, &after)
+		}
+	}
+	return nil
+}
+
 func getFeatureValueSet(dataSet *[][]string, featureIndex int) (featureSet *[]string, features *[]string) {
 	sets := []string{}
 	vecs := []string{}

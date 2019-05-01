@@ -30,4 +30,10 @@ func TestChooseBestFeature(t *testing.T) {
 		return
 	}
 	fmt.Println(out.String())
+
+	featureValues := []string{"1", "1"}
+	classify := FindByOrderFeature(node, &featureValues)
+	if classify != nil {
+		fmt.Println(*classify)
+	}
 }
