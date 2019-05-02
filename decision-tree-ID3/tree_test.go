@@ -15,10 +15,11 @@ import (
 func TestChooseBestFeature(t *testing.T) {
 	dataSet := [][]string{
 		{"1", "1", "yes"},
-		{"1", "1", "yes"},
+		{"1", "0", "yes"},
 		{"1", "0", "no"},
-		{"0", "1", "no"},
-		{"0", "1", "no"},
+		{"0", "2", "no"},
+		{"0", "2", "no"},
+		{"0", "3", "no"},
 	}
 	bestFeature := ChooseBestFeature(&dataSet)
 	fmt.Println(bestFeature)
@@ -37,7 +38,7 @@ func TestChooseBestFeature(t *testing.T) {
 	fmt.Println(out.String())
 
 	featureValues := []string{"1", "1"}
-	classify := FindByOrderFeature(node, &featureValues)
+	classify := FindByOrderFeature(node, &featureValues, &lables)
 	if classify != nil {
 		fmt.Println(*classify)
 	}
@@ -73,4 +74,10 @@ func TestChooseBestFeatureFromFile(t *testing.T) {
 		return
 	}
 	fmt.Println(out.String())
+
+	featureValues := []string{"pre", "myope", "yes", "normal"}
+	classify := FindByOrderFeature(node, &featureValues, &lables)
+	if classify != nil {
+		fmt.Println(*classify)
+	}
 }

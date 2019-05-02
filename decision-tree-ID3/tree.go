@@ -78,18 +78,42 @@ func CreateTree(dataSet *[][]string, lables *[]string) *Node {
 	}
 }
 
-func FindByOrderFeature(node *Node, featureValues *[]string) *string {
+func findInputBestFeatureIndex(node *Node, inputFeatureValues *[]string, inputLables *[]string) (int, *string, *[]string) {
+	value := ""
+	bestLable := node.Lable
+	subLable := []string{}
+	lableLen := len(*inputLables)
+	i := 0
+	for _, item := range *inputLables {
+		if item == bestLable {
+			value = (*inputFeatureValues)[i]
+			subLable = append(subLable, (*inputLables)[:i]...)
+			if i < lableLen-1 {
+				subLable = append(subLable, (*inputLables)[i+1:]...)
+			}
+			break
+		}
+		i += 1
+	}
+	return i, &value, &subLable
+}
+
+func FindByOrderFeature(node *Node, featureValues *[]string, inputLables *[]string) *string {
 	if node.FeatureList == nil {
 		return &node.Classify
 	}
+	featureLen := len(*featureValues)
+	index, value, subLables := findInputBestFeatureIndex(node, featureValues, inputLables)
+	after := (*featureValues)[:index]
+	if index < featureLen-1 {
+		after = append(after, (*featureValues)[index+1:]...)
+	}
 	for _, item := range *node.FeatureList {
-		first := (*featureValues)[0]
-		after := (*featureValues)[1:]
-		if first == item.FeatureValue && item.FeatureList == nil {
+		if *value == item.FeatureValue && item.FeatureList == nil {
 			return &item.Classify
 		}
-		if first == item.FeatureValue && item.FeatureList != nil {
-			return FindByOrderFeature(&item, &after)
+		if *value == item.FeatureValue && item.FeatureList != nil {
+			return FindByOrderFeature(&item, &after, subLables)
 		}
 	}
 	return nil
@@ -119,7 +143,12 @@ func calcFeatureNumber(dataSet *[][]string) (int, error) {
 }
 
 func removeArrayIndex(arr *[]string, index int) *[]string {
-	retArr := (*arr)[0:index]
-	retArr = append(retArr, (*arr)[index+1:]...)
+	arrLen := len(*arr)
+	arrCopy := make([]string, arrLen, arrLen)
+	copy(arrCopy, *arr)
+	retArr := arrCopy[:index]
+	if index < arrLen-1 {
+		retArr = append(retArr, arrCopy[index+1:]...)
+	}
 	return &retArr
 }
