@@ -1,8 +1,11 @@
 package tree
 
 import (
+	"fmt"
 	"math"
 )
+
+var _ = fmt.Println
 
 func CalcShannoEnt(dataSet *[][]string) float64 {
 	mapTmp := map[string]int{}
@@ -10,10 +13,9 @@ func CalcShannoEnt(dataSet *[][]string) float64 {
 		v := item[len(item)-1]
 		_, ok := mapTmp[v]
 		if !ok {
-			mapTmp[v] = 1
-		} else {
-			mapTmp[v] += 1
+			mapTmp[v] = 0
 		}
+		mapTmp[v] += 1
 	}
 	shannoEnt := 0.0
 	number := len(*dataSet)

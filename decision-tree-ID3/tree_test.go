@@ -1,9 +1,14 @@
 package tree
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
+	// "io/ioutil"
+	"os"
+	// "strconv"
+	"strings"
 	"testing"
 )
 
@@ -36,4 +41,36 @@ func TestChooseBestFeature(t *testing.T) {
 	if classify != nil {
 		fmt.Println(*classify)
 	}
+}
+
+func TestChooseBestFeatureFromFile(t *testing.T) {
+	file, err := os.Open("./dataset/lenses.txt")
+	if err != nil {
+		return
+	}
+	defer file.Close()
+	dataSet := [][]string{}
+	buf := bufio.NewReader(file)
+	for {
+		line, _, err := buf.ReadLine()
+		if err != nil {
+			break
+		}
+		fields := strings.Split(string(line), "\t")
+		dataSet = append(dataSet, fields)
+	}
+
+	lables := []string{"age", "prescript", "astigmatic", "tearRate"}
+
+	node := CreateTree(&dataSet, &lables)
+	b, err := json.Marshal(node)
+	if err != nil {
+		return
+	}
+	var out bytes.Buffer
+	err = json.Indent(&out, b, "", "\t")
+	if err != nil {
+		return
+	}
+	fmt.Println(out.String())
 }

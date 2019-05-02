@@ -20,9 +20,8 @@ func timesSort(values *[]string) *PairList {
 	for _, item := range *values {
 		if _, ok := mapTmp[item]; !ok {
 			mapTmp[item] = 0
-		} else {
-			mapTmp[item] += 1
 		}
+		mapTmp[item] += 1
 	}
 	// sort by map value
 	p := make(PairList, len(mapTmp))

@@ -16,22 +16,24 @@ type Node struct {
 
 func ChooseBestFeature(dataSet *[][]string) int {
 	baseEnt := CalcShannoEnt(dataSet)
-	bestEnt := 0.0
-	bestFeature := -1
+	bestInfoGain := 0.0
 	setLen := len(*dataSet)
 	featureNumber, _ := calcFeatureNumber(dataSet)
+	bestFeature := 0
 	for i := 0; i < featureNumber; i++ {
 		values, _ := getFeatureValueSet(dataSet, i)
 		featureEnt := 0.0
 		for _, item := range *values {
-			itemTmp := item
+			itemCopy := make([]byte, len(item), len(item))
+			copy(itemCopy, []byte(item))
+			itemTmp := string(itemCopy)
 			subSet := SplitDataSet(dataSet, i, &itemTmp)
 			subLen := len(*subSet)
 			featureEnt += float64(subLen) / float64(setLen) * CalcShannoEnt(subSet)
 		}
 		infoGain := baseEnt - featureEnt
-		if infoGain > bestEnt {
-			bestEnt = featureEnt
+		if infoGain > bestInfoGain {
+			bestInfoGain = infoGain
 			bestFeature = i
 		}
 	}
@@ -60,8 +62,10 @@ func CreateTree(dataSet *[][]string, lables *[]string) *Node {
 		return &node
 	}
 	bestFeatureIndex := ChooseBestFeature(dataSet)
+	fmt.Println("bestFeatureInde: ", bestFeatureIndex)
 	// name := (*lables)[bestFeatureIndex]
 	sets, _ := getFeatureValueSet(dataSet, bestFeatureIndex)
+	lable := (*lables)[bestFeatureIndex]
 	nodes := []Node{}
 	for _, item := range *sets {
 		itemTmp := item
@@ -70,7 +74,6 @@ func CreateTree(dataSet *[][]string, lables *[]string) *Node {
 		node.FeatureValue = item
 		nodes = append(nodes, *node)
 	}
-	lable := (*lables)[bestFeatureIndex]
 	return &Node{
 		Classify:    "",
 		FeatureList: &nodes,
