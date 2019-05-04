@@ -1,0 +1,181 @@
+add
+age: young
+prescript: myope
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+add
+age: young
+prescript: myope
+astigmatic: no
+tearRate: normal
+end soft
+
+add
+age: young
+prescript: myope
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+add
+age: young
+prescript: myope
+astigmatic: yes
+tearRate: normal
+end hard
+
+add
+age: young
+prescript: hyper
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+add
+age: young
+prescript: hyper
+astigmatic: no
+tearRate: normal
+end soft
+
+add
+age: young
+prescript: hyper
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+add
+age: young
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+end hard
+
+
+
+add
+age: pre
+prescript: myope
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+add
+age: pre
+prescript: myope
+astigmatic: no
+tearRate: normal
+end soft
+
+add
+age: pre
+prescript: myope
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+add
+age: pre
+prescript: myope
+astigmatic: yes
+tearRate: normal
+end hard
+
+add
+age: pre
+prescript: hyper
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+add
+age: pre
+prescript: hyper
+astigmatic: no
+tearRate: normal
+end soft
+
+add
+age: pre
+prescript: hyper
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+add
+age: pre
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+end no lenses
+
+
+
+add
+age: presbyopic
+prescript: myope
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+add
+age: presbyopic
+prescript: myope
+astigmatic: no
+tearRate: normal
+end no lenses
+
+add
+age: presbyopic
+prescript: myope
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+add
+age: presbyopic
+prescript: myope
+astigmatic: yes
+tearRate: normal
+end hard
+
+add
+age: presbyopic
+prescript: hyper
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+add
+age: presbyopic
+prescript: hyper
+astigmatic: no
+tearRate: normal
+end soft
+
+add
+age: presbyopic
+prescript: hyper
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+add
+age: presbyopic
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+end no lenses
+
+
+
+add
+age: presbyopic
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+special: yes
+end hard

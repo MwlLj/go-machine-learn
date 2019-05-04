@@ -1,0 +1,181 @@
+infer
+age: young
+prescript: myope
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+infer
+age: young
+prescript: myope
+astigmatic: no
+tearRate: normal
+end soft
+
+infer
+age: young
+prescript: myope
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+infer
+age: young
+prescript: myope
+astigmatic: yes
+tearRate: normal
+end hard
+
+infer
+age: young
+prescript: hyper
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+infer
+age: young
+prescript: hyper
+astigmatic: no
+tearRate: normal
+end soft
+
+infer
+age: young
+prescript: hyper
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+infer
+age: young
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+end hard
+
+
+
+infer
+age: pre
+prescript: myope
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+infer
+age: pre
+prescript: myope
+astigmatic: no
+tearRate: normal
+end soft
+
+infer
+age: pre
+prescript: myope
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+infer
+age: pre
+prescript: myope
+astigmatic: yes
+tearRate: normal
+end hard
+
+infer
+age: pre
+prescript: hyper
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+infer
+age: pre
+prescript: hyper
+astigmatic: no
+tearRate: normal
+end soft
+
+infer
+age: pre
+prescript: hyper
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+infer
+age: pre
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+end no lenses
+
+
+
+infer
+age: presbyopic
+prescript: myope
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+infer
+age: presbyopic
+prescript: myope
+astigmatic: no
+tearRate: normal
+end no lenses
+
+infer
+age: presbyopic
+prescript: myope
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+infer
+age: presbyopic
+prescript: myope
+astigmatic: yes
+tearRate: normal
+end hard
+
+infer
+age: presbyopic
+prescript: hyper
+astigmatic: no
+tearRate: reduced
+end no lenses
+
+infer
+age: presbyopic
+prescript: hyper
+astigmatic: no
+tearRate: normal
+end soft
+
+infer
+age: presbyopic
+prescript: hyper
+astigmatic: yes
+tearRate: reduced
+end no lenses
+
+infer
+age: presbyopic
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+end no lenses
+
+
+
+infer
+age: presbyopic
+prescript: hyper
+astigmatic: yes
+tearRate: normal
+special: yes
+end hard
